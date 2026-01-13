@@ -27,7 +27,3 @@ setup(
     packages=find_packages(),
     install_requires = get_requirement('requirements.txt')
     )
-
-
-
-
