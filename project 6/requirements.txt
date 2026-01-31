@@ -1,8 +1,7 @@
+streamlit
 pandas
 numpy
 matplotlib
 seaborn
-sklearn
-python
-
+scikit-learn
 pymysql
