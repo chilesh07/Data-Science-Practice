@@ -5,3 +5,5 @@ matplotlib
 seaborn
 scikit-learn
 pymysql
+base64
+joblib
