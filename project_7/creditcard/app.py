@@ -2,12 +2,12 @@ import streamlit as st
 import joblib
 import pandas as pd
 import base64
+import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(BASE_DIR, "models", "fraud_detection_model.pkl")
 
-# Load model
-model = joblib.load("models/fraud_detection_model.pkl")
-
-
+model = joblib.load(model_path)
 
 def add_bg_from_local(image_file):
     with open(image_file, "rb") as f:
