@@ -9,27 +9,6 @@ model_path = os.path.join(BASE_DIR, "models", "fraud_detection_model.pkl")
 
 model = joblib.load(model_path)
 
-def add_bg_from_local(image_file):
-    with open(image_file, "rb") as f:
-        encoded_string = base64.b64encode(f.read()).decode()
-
-    st.markdown(
-        f"""
-        <style>
-        .stApp {{
-            background-image: url("data:image/png;base64,{encoded_string}");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-add_bg_from_local("cyber.png")
-
-
 st.title("💳 Credit Card Fraud Detection")
 st.write("Enter transaction details:")
 
