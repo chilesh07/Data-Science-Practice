@@ -5,7 +5,7 @@ import base64
 
 
 # Load model
-model = joblib.load("C:/Users/chilesh/Desktop/Data science/project_7/creditcard/models/fraud_detection_model.pkl")
+model = joblib.load("models/fraud_detection_model.pkl")
 
 
 
