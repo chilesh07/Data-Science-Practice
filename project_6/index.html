@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Attrition Predictor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      padding: 40px;
+    }
+    .card {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 { text-align: center; }
+    label { font-weight: bold; }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0 15px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Employee Attrition Predictor</h2>
+
+  <label>Age</label>
+  <input type="number" id="age" value="30" />
+
+  <label>Monthly Income</label>
+  <input type="number" id="income" value="4000" />
+
+  <label>Job Role</label>
+  <select id="jobrole">
+    <option>Sales Executive</option>
+    <option>Research Scientist</option>
+    <option>Laboratory Technician</option>
+    <option>Manufacturing Director</option>
+  </select>
+
+  <label>OverTime</label>
+  <select id="overtime">
+    <option>No</option>
+    <option>Yes</option>
+  </select>
+
+  <label>Years At Company</label>
+  <input type="number" id="years" value="3" />
+
+  <button onclick="predict()">Check Attrition</button>
+
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+// This function calls your Flask API
+async function predict() {
+  const payload = {
+    Age: parseInt(document.getElementById("age").value),
+    MonthlyIncome: parseInt(document.getElementById("income").value),
+    OverTime: document.getElementById("overtime").value,
+    YearsAtCompany: parseInt(document.getElementById("years").value),
+    JobRole: document.getElementById("jobrole").value
+  };
+
+  const res = await fetch("http://127.0.0.1:5000/predict", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(payload)
+  });
+
+  const data = await res.json();
+  document.getElementById("result").innerHTML =
+    `Prediction: ${data.prediction} (Risk: ${data.probability})`;
+}
+</script>
+
+</body>
+</html>
